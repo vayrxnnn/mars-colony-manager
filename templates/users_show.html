@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card-custom text-center">
+            {% if avatar %}
+                <img src="{{ url_for('static',
+                                     filename='img/' + avatar) }}"
+                     class="rounded-circle shadow mb-4"
+                     width="180"
+                     height="180"
+                     style="object-fit: cover;">
+            {% endif %}
+            <div class="mb-4">
+                <h1 class="fw-bold">
+                    Профиль космонавта
+                </h1>
+
+                <p class="subtitle">
+                    Личная информация жителя колонии
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <h2>
+                    {{ full_name }}
+                </h2>
+
+                <h4 class="subtitle">
+                    Родной город: {{ city }}
+                </h4>
+            </div>
+
+            <img
+                src="https://static-maps.yandex.ru/1.x/?ll={{ point|replace(' ', ',') }}&size=650,450&z=10&l=sat"
+                class="img-fluid rounded shadow"
+                alt="Карта">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

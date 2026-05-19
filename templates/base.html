@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+
+<div class="container py-4">
+    <div class="navbar-custom d-flex justify-content-between align-items-center">
+
+        <div>
+            <div class="logo-title">
+                Миссия Колонизация Марса
+            </div>
+
+            <div class="subtitle">
+                И на Марсе будут яблони цвести!
+            </div>
+        </div>
+
+        <div class="mt-2">
+            {% if current_user.is_authenticated %}
+                {% if request.endpoint != 'index' %}
+                    <a href="/"
+                       class="btn btn-outline-light">
+                        ← Вернуться к панели управления
+                    </a>
+                {% endif %}
+
+                {% if request.endpoint != 'users_show' %}
+                <a href="/users_show/{{ current_user.id }}"
+                   class="btn btn-outline-light me-2">
+                    {% if current_user.avatar %}
+                    <img src="{{ url_for('static',
+                                         filename='img/' + current_user.avatar) }}"
+                         width="40"
+                         height="40"
+                         class="rounded-circle me-2"
+                         style="object-fit: cover;">
+                    {% endif %}
+                    {{ current_user.name }}
+                </a>
+                {% endif %}
+
+                <a href="/logout" class="btn btn-outline-danger">
+                    Выйти
+                </a>
+
+            {% else %}
+
+                <a href="/register" class="btn btn-outline-light me-2">
+                    Регистрация
+                </a>
+                <a href="/login" class="btn btn-primary">
+                    Войти
+                </a>
+
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card-custom">
+            <div class="mb-4">
+                <h2 class="fw-bold">
+                    {{ title }}
+                </h2>
+
+                <p class="subtitle">
+                    Панель управления департаментом
+                </p>
+            </div>
+
+            <form method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Название департамента
+                    </label>
+                    {{ form.title(class="form-control", placeholder="Введите название департамента") }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        ID начальника
+                    </label>
+                    {{ form.chief(class="form-control",placeholder="ID начальника") }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Участники
+                    </label>
+                    {{ form.members(class="form-control",placeholder="1, 2, 3") }}
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">
+                        Email департамента
+                    </label>
+                    {{ form.email(class="form-control",placeholder="department@mars.com") }}
+                </div>
+
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
